@@ -5,7 +5,7 @@ from openai import OpenAI
 from characters import CHARACTERS
 
 load_dotenv()
-token = os.environ.get("token")
+token = st.secrets.get("token") or os.environ.get("token")
 # --- КОНФИГУРАЦИЯ ---
 st.set_page_config(page_title="Телефонная будка 📞", page_icon="📞")
 
@@ -108,4 +108,5 @@ if prompt:
     msg_data = {"role": "assistant", "content": ai_text}
     if ai_audio:
         msg_data["audio"] = ai_audio
+
     st.session_state.messages.append(msg_data)
